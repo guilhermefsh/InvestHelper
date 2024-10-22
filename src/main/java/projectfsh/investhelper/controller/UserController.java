@@ -2,6 +2,8 @@ package projectfsh.investhelper.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import projectfsh.investhelper.dtos.CreateUserDTO;
+import projectfsh.investhelper.dtos.UpdateUserDto;
 import projectfsh.investhelper.entity.User;
 import projectfsh.investhelper.service.UserService;
 

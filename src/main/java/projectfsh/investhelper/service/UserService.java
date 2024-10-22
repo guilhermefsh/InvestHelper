@@ -1,8 +1,8 @@
 package projectfsh.investhelper.service;
 
 import org.springframework.stereotype.Service;
-import projectfsh.investhelper.controller.CreateUserDTO;
-import projectfsh.investhelper.controller.UpdateUserDto;
+import projectfsh.investhelper.dtos.CreateUserDTO;
+import projectfsh.investhelper.dtos.UpdateUserDto;
 import projectfsh.investhelper.entity.User;
 import projectfsh.investhelper.repository.UserRepository;
 

@@ -2,6 +2,7 @@ package projectfsh.investhelper.service;
 
 import org.springframework.stereotype.Service;
 import projectfsh.investhelper.controller.CreateUserDTO;
+import projectfsh.investhelper.controller.UpdateUserDto;
 import projectfsh.investhelper.entity.User;
 import projectfsh.investhelper.repository.UserRepository;
 
@@ -48,6 +49,25 @@ public class UserService {
 
         if(userExists) {
             userRepository.deleteById(id);
+        }
+    }
+
+    public void updateUserById(String userId, UpdateUserDto updateUserDto) {
+        var id = UUID.fromString(userId);
+
+        var userEntity = userRepository.findById(id);
+
+        if(userEntity.isPresent()) {
+            var user = userEntity.get();
+
+            if(updateUserDto.username()!= null) {
+                user.setUsername(updateUserDto.username());
+            }
+            if(updateUserDto.password()!= null) {
+                user.setPassword(updateUserDto.password());
+            }
+
+            userRepository.save(user);
         }
     }
 }

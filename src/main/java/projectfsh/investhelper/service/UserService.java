@@ -6,6 +6,8 @@ import projectfsh.investhelper.entity.User;
 import projectfsh.investhelper.repository.UserRepository;
 
 import java.time.Instant;
+import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -20,15 +22,23 @@ public class UserService {
     public UUID createUser(CreateUserDTO createUserDTO) {
 
         var entity = new User(
-                Instant.now(),
+                UUID.randomUUID(),
                 createUserDTO.username(),
                 createUserDTO.email(),
+                createUserDTO.password(),
                 Instant.now(),
-                UUID.randomUUID(),
-                createUserDTO.password()
+                null
         );
 
         var userSaved = userRepository.save(entity);
         return userSaved.getUserId();
+    }
+
+    public Optional <User> getUserById(String userId) {
+        return userRepository.findById(UUID.fromString(userId));
+    }
+
+    public List<User> listAllUsers(){
+        return userRepository.findAll();
     }
 }

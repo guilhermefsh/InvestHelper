@@ -33,13 +33,13 @@ public class User {
     public User() {
     }
 
-    public User(Instant creationTimestamp, String email, String password, Instant updatedTimestamp, UUID userId, String username) {
-        this.creationTimestamp = creationTimestamp;
-        this.email = email;
-        this.password = password;
-        this.updatedTimestamp = updatedTimestamp;
+    public User(UUID userId,String username, String email, String password, Instant creationTimestamp, Instant updatedTimestamp) {
         this.userId = userId;
         this.username = username;
+        this.email = email;
+        this.password = password;
+        this.creationTimestamp = creationTimestamp;
+        this.updatedTimestamp = updatedTimestamp;
     }
 
     public Instant getCreationTimestamp() {

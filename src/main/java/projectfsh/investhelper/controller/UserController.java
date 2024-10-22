@@ -6,6 +6,7 @@ import projectfsh.investhelper.entity.User;
 import projectfsh.investhelper.service.UserService;
 
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/users")
@@ -26,6 +27,17 @@ public class UserController {
 
     @GetMapping("/{userId}")
     public ResponseEntity<User> getUserById(@PathVariable("userId") String userId) {
-        return null;
+        var user = userService.getUserById(userId);
+        if(user.isPresent()){
+            return ResponseEntity.ok(user.get());
+        }else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @GetMapping
+    public ResponseEntity<List<User>> listAllUsers() {
+        var users = userService.listAllUsers();
+        return ResponseEntity.ok(users);
     }
 }

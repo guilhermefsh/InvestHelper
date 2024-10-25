@@ -14,6 +14,7 @@ import lombok.Setter;
 public class Stock {
 
     @Id
+    @Column(name = "stock_id")
     private String stockId;
 
     @Column(name = "description")

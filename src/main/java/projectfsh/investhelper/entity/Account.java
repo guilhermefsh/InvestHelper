@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -19,7 +20,7 @@ public class Account {
     private UUID accountId;
 
     @Column(name = "description")
-    private String accountDescription;
+    private String description;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -30,13 +31,17 @@ public class Account {
     private BillingAddress billingAddress;
 
     @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
-    private List<AccountStock> accountStocks;
+    private List<AccountStock> accountStocks = new ArrayList<>();
 
     public Account() {
     }
 
-    public Account(UUID accountId, String accountDescription) {
+    public Account(UUID accountId, User user, BillingAddress billingAddress, String accountDescription, List<AccountStock> accountStocks) {
         this.accountId = accountId;
-        this.accountDescription = accountDescription;
+        this.user = user;
+        this.billingAddress = billingAddress;
+        this.description = accountDescription;
+        this.accountStocks = accountStocks;
     }
+
 }

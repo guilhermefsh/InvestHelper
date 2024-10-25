@@ -11,16 +11,16 @@ import lombok.Setter;
 public class AccountStock {
 
     @EmbeddedId
-    private AccountStockId id;
+    private AccountStockId accountStockId;
 
     @ManyToOne
-    @MapsId("accountId")
     @JoinColumn(name = "account_id")
+    @MapsId("accountId")
     private Account account;
 
     @ManyToOne
-    @MapsId("stockId")
     @JoinColumn(name = "stock_id")
+    @MapsId("stockId")
     private Stock stock;
 
     @Column(name = "quantity")
@@ -28,10 +28,10 @@ public class AccountStock {
 
     public AccountStock() {}
 
-    public AccountStock(Account account, AccountStockId id, Integer quantity, Stock stock) {
+    public AccountStock(AccountStockId id, Account account, Stock stock, Integer quantity) {
+        this.accountStockId = id;
         this.account = account;
-        this.id = id;
-        this.quantity = quantity;
         this.stock = stock;
+        this.quantity = quantity;
     }
 }

@@ -2,6 +2,8 @@ package projectfsh.investhelper.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import projectfsh.investhelper.dtos.AccountResponseDTO;
+import projectfsh.investhelper.dtos.CreateAccountDTO;
 import projectfsh.investhelper.dtos.CreateUserDTO;
 import projectfsh.investhelper.dtos.UpdateUserDto;
 import projectfsh.investhelper.entity.User;
@@ -55,5 +57,19 @@ public class UserController {
     public ResponseEntity<Void> deleteUserById(@PathVariable("userId") String userId) {
         userService.deleteUser(userId);
         return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping("/{userId}/accounts")
+    public ResponseEntity<Void> createAccountById(@PathVariable("userId") String userId,
+                                               @RequestBody CreateAccountDTO createAccountDTODTO) {
+        userService.createAccount(userId, createAccountDTODTO);
+        return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/{userId}/accounts")
+    public ResponseEntity<List<AccountResponseDTO>> getAccountById(@PathVariable("userId") String userId) {
+
+        var accounts = userService.listAccountsById(userId);
+        return ResponseEntity.ok(accounts);
     }
 }
